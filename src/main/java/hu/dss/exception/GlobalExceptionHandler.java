@@ -1,6 +1,11 @@
 package hu.dss.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
@@ -12,7 +17,7 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void handleSalesDataProcessingException(SalesDataProcessingException e) {
-        System.out.println(e.getMessage());
+        LOGGER.error(e.getMessage());
     }
 
     private void handleGenericException(Throwable e) {

@@ -3,10 +3,14 @@ package hu.dss.controller;
 import hu.dss.util.Message;
 import hu.dss.service.*;
 import hu.dss.util.Separator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 
 public class ProcessController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProcessController.class);
 
     private final InputService inputService;
     private final CommissionRuleService ruleService;
@@ -39,20 +43,20 @@ public class ProcessController {
         System.out.println(Message.SETUPS_COMPLETED.getMessage());
         System.out.println(Message.LINE_SEPARATOR.getMessage());
 
-        System.out.println(Message.START_EXECUTION.getMessage());
-        System.out.println(MessageFormat.format(Message.LOADING_SALES_DATA_FROM_FILE_PATH.getMessage(), filePath));
+        LOGGER.info(Message.START_EXECUTION.getMessage());
+        LOGGER.info(MessageFormat.format(Message.LOADING_SALES_DATA_FROM_FILE_PATH.getMessage(), filePath));
         salesDataProcessorService.readAndProcessSalesData(filePath, separator);
 
-        System.out.println(Message.INITIALIZE_COMMISSION_RULES.getMessage());
+        LOGGER.info(Message.INITIALIZE_COMMISSION_RULES.getMessage());
         ruleService.createCommissionRules();
 
-        System.out.println(Message.CALCULATE_COMMISSION.getMessage());
+        LOGGER.info(Message.CALCULATE_COMMISSION.getMessage());
         commissionCalculatorService.calculateCommission(salesDataService.getSalesDataList());
 
-        System.out.println(Message.START_GENERATING_COMMISSION_REPORT_XML.getMessage());
+        LOGGER.info(Message.START_GENERATING_COMMISSION_REPORT_XML.getMessage());
         xmlGeneratorService.generateCommissionReportXml(commissionCalculatorService.getResultList());
 
-        System.out.println(Message.START_GENERATING_COMMISSION_REPORT_DETAILED_XML.getMessage());
+        LOGGER.info(Message.START_GENERATING_COMMISSION_REPORT_DETAILED_XML.getMessage());
         xmlGeneratorService.generateCommissionReportDetailedXml(commissionCalculatorService.getResultListWithDetails());
     }
 

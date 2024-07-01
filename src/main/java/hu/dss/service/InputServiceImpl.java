@@ -2,6 +2,8 @@ package hu.dss.service;
 
 import hu.dss.util.Message;
 import hu.dss.util.Separator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class InputServiceImpl implements InputService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(InputServiceImpl.class);
     private final Scanner scanner;
 
     public InputServiceImpl() {
@@ -28,7 +31,7 @@ public class InputServiceImpl implements InputService {
             Path path = Paths.get(filePath);
 
             if (!Files.isRegularFile(path) || !Files.exists(path)) {
-                System.err.println(Message.INVALID_FILE_PATH.getMessage());
+                LOGGER.error(Message.INVALID_FILE_PATH.getMessage());
             } else {
                 break;
             }
@@ -51,7 +54,7 @@ public class InputServiceImpl implements InputService {
             separator = Separator.getSeparatorByCode(separatorChoice);
 
             if (separator == null) {
-                System.err.println(Message.CHOOSE_SEPARATOR_INVALID_CHOICE.getMessage());
+                LOGGER.error(Message.CHOOSE_SEPARATOR_INVALID_CHOICE.getMessage());
             } else {
                 break;
             }
