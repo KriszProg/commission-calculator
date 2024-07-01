@@ -14,7 +14,7 @@ public class InputServiceImpl implements InputService {
     private final Scanner scanner;
 
     public InputServiceImpl() {
-        this.scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));;
+        this.scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     }
 
     @Override
