@@ -25,10 +25,10 @@ public class SalesDataValidator {
         String[] parts = line.split(separator.getSeparatorRegex());
 
         if (!isProductTypeValid(parts[0])) {
-            errors.add(Message.INVALID_PRODUCT_TYPE.getMessage());
+            errors.add(Message.ERROR_INVALID_PRODUCT_TYPE.getMessage());
         }
         if (!isEmployeeIdValid(parts[1])) {
-            errors.add(Message.INVALID_EMPLOYEE_ID.getMessage());
+            errors.add(Message.ERROR_INVALID_EMPLOYEE_ID.getMessage());
         }
 
         Message salesValueErrorMessage = validateSalesValueAndGetErrorMessage(parts[2]);
@@ -53,10 +53,10 @@ public class SalesDataValidator {
         try {
             Integer salesValue = Integer.parseInt(salesValueString.trim());
             if (salesValue <= 0) {
-                return Message.INVALID_SALES_VALUE;
+                return Message.ERROR_INVALID_SALES_VALUE;
             }
         } catch (NumberFormatException e) {
-            return Message.INVALID_SALES_VALUE_FORMAT;
+            return Message.ERROR_INVALID_SALES_VALUE_FORMAT;
         }
         return null;
     }

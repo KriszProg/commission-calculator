@@ -5,6 +5,8 @@ import hu.dss.model.CommissionData;
 import hu.dss.model.xmlwrapper.CommissionDataListWrapper;
 import hu.dss.model.CommissionDataDetailed;
 import hu.dss.model.xmlwrapper.CommissionDataDetailedListWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class XmlGeneratorServiceImpl implements XmlGeneratorService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(XmlGeneratorServiceImpl.class);
     public static final String BASE_FILE_PATH = "C:/commission-report/";
     public static final String COMMISSION_REPORT_FILE_PATH = BASE_FILE_PATH + "commission-report.xml";
     public static final String COMMISSION_REPORT_DETAILED_FILE_PATH = BASE_FILE_PATH + "commission-report-detailed.xml";
@@ -44,7 +47,7 @@ public class XmlGeneratorServiceImpl implements XmlGeneratorService {
 
             marshaller.marshal(wrapper, file);
 
-            System.out.println(MessageFormat.format(Message.XML_FILE_CREATED_SUCCESSFULLY_AT.getMessage(), file.getAbsolutePath()));
+            LOGGER.info(MessageFormat.format(Message.XML_FILE_CREATED_SUCCESSFULLY_AT.getMessage(), file.getAbsolutePath()));
         } catch (JAXBException e) {
             e.printStackTrace();
         }

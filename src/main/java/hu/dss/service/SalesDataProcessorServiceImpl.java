@@ -46,13 +46,13 @@ public class SalesDataProcessorServiceImpl implements SalesDataProcessorService 
 
                 if (!validator.isLineSeparatorValid(line, separator)) {
                     errorMap.computeIfAbsent(lineNumber, k -> new ArrayList<>())
-                            .add(Message.INVALID_SEPARATOR.getMessage());
+                            .add(Message.ERROR_INVALID_SEPARATOR.getMessage());
                     continue;
                 }
 
                 if (!validator.isLineContentValid(line, separator)) {
                     errorMap.computeIfAbsent(lineNumber, k -> new ArrayList<>())
-                            .add(Message.INVALID_LINE_CONTENT.getMessage());
+                            .add(Message.ERROR_INVALID_LINE_CONTENT.getMessage());
                     continue;
                 }
 

@@ -61,9 +61,9 @@ class SalesDataValidatorTest {
         Separator separator = Separator.PIPE;
         List<String> errors = validator.validateLineDetailsAndGetErrors(line, separator);
         assertEquals(3, errors.size());
-        assertTrue(errors.contains(Message.INVALID_PRODUCT_TYPE.getMessage()));
-        assertTrue(errors.contains(Message.INVALID_EMPLOYEE_ID.getMessage()));
-        assertTrue(errors.contains(Message.INVALID_SALES_VALUE_FORMAT.getMessage()));
+        assertTrue(errors.contains(Message.ERROR_INVALID_PRODUCT_TYPE.getMessage()));
+        assertTrue(errors.contains(Message.ERROR_INVALID_EMPLOYEE_ID.getMessage()));
+        assertTrue(errors.contains(Message.ERROR_INVALID_SALES_VALUE_FORMAT.getMessage()));
     }
 
     @Test
@@ -73,7 +73,7 @@ class SalesDataValidatorTest {
         Separator separator = Separator.PIPE;
         List<String> errors = validator.validateLineDetailsAndGetErrors(line, separator);
         assertEquals(1, errors.size());
-        assertTrue(errors.contains(Message.INVALID_EMPLOYEE_ID.getMessage()));
+        assertTrue(errors.contains(Message.ERROR_INVALID_EMPLOYEE_ID.getMessage()));
     }
 
     @Test
@@ -83,7 +83,7 @@ class SalesDataValidatorTest {
         Separator separator = Separator.PIPE;
         List<String> errors = validator.validateLineDetailsAndGetErrors(line, separator);
         assertEquals(1, errors.size());
-        assertTrue(errors.contains(Message.INVALID_SALES_VALUE.getMessage()));
+        assertTrue(errors.contains(Message.ERROR_INVALID_SALES_VALUE.getMessage()));
     }
 
     @Test
@@ -93,7 +93,7 @@ class SalesDataValidatorTest {
         Separator separator = Separator.PIPE;
         List<String> errors = validator.validateLineDetailsAndGetErrors(line, separator);
         assertEquals(1, errors.size());
-        assertTrue(errors.contains(Message.INVALID_SALES_VALUE.getMessage()));
+        assertTrue(errors.contains(Message.ERROR_INVALID_SALES_VALUE.getMessage()));
     }
 
 }
