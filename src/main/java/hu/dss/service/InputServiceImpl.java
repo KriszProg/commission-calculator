@@ -14,12 +14,12 @@ public class InputServiceImpl implements InputService {
     private final Scanner scanner;
 
     public InputServiceImpl() {
-        this.scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));;
+        this.scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     }
 
     @Override
     public String getValidFilePathFromUser() {
-        String filePath = "";
+        String filePath;
 
         while (true) {
             System.out.println(Message.ENTER_FILE_PATH.getMessage());
@@ -39,7 +39,6 @@ public class InputServiceImpl implements InputService {
 
     @Override
     public Separator getSeparatorChoiceFromUser() {
-        String separatorChoice = "";
         Separator separator;
 
         while (true) {
@@ -48,7 +47,7 @@ public class InputServiceImpl implements InputService {
             System.out.println(Message.CHOOSE_SEPARATOR_OPTION_SEMICOLON.getMessage());
             System.out.println(Message.CHOOSE_SEPARATOR_ENTER_CHOICE.getMessage());
 
-            separatorChoice = scanner.nextLine().trim();
+            String separatorChoice = scanner.nextLine().trim();
             separator = Separator.getSeparatorByCode(separatorChoice);
 
             if (separator == null) {
