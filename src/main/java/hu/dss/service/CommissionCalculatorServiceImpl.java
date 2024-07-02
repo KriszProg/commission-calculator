@@ -9,9 +9,9 @@ public class CommissionCalculatorServiceImpl implements CommissionCalculatorServ
     private final CommissionRuleService ruleService;
 
     /**
-     * INFO: Map<String=employeeId, Map<ProductType, Integer=cumulativeSalesValue>>
+     * INFO: Map<Employee=employee, Map<ProductType, Integer=cumulativeSalesValue>>
      */
-    private final Map<String, Map<ProductType, Integer>> cumulativeSalesData = new LinkedHashMap<>();
+    private final Map<Employee, Map<ProductType, Integer>> cumulativeSalesData = new LinkedHashMap<>();
 
     private List<CalculationDetails> calculationDetailsPerEmployee = new ArrayList<>();
     private final List<CommissionData> resultList = new ArrayList<>();
@@ -39,28 +39,28 @@ public class CommissionCalculatorServiceImpl implements CommissionCalculatorServ
 
     private void prepareCalculation(List<SalesData> salesDataList) {
         for (SalesData salesData : salesDataList) {
-            String employeeId = salesData.getEmployeeId();
+            Employee employee = salesData.getEmployee();
             ProductType productType = salesData.getProductType();
             Integer salesValue = salesData.getSalesValue();
 
-            Map<ProductType, Integer> productTypeAndSalesValueMap = cumulativeSalesData.getOrDefault(employeeId, new LinkedHashMap<>());
+            Map<ProductType, Integer> productTypeAndSalesValueMap = cumulativeSalesData.getOrDefault(employee, new LinkedHashMap<>());
             Integer currentValue = productTypeAndSalesValueMap.getOrDefault(productType, 0);
 
             productTypeAndSalesValueMap.put(productType, currentValue + salesValue);
 
-            cumulativeSalesData.put(employeeId, productTypeAndSalesValueMap);
+            cumulativeSalesData.put(employee, productTypeAndSalesValueMap);
         }
     }
 
     private void executeCalculation() {
-        for (Map.Entry<String, Map<ProductType, Integer>> entry : cumulativeSalesData.entrySet()) {
+        for (Map.Entry<Employee, Map<ProductType, Integer>> entry : cumulativeSalesData.entrySet()) {
             processCumulativeSalesData(entry);
         }
     }
 
-    private void processCumulativeSalesData(Map.Entry<String, Map<ProductType, Integer>> entry) {
+    private void processCumulativeSalesData(Map.Entry<Employee, Map<ProductType, Integer>> entry) {
         calculationDetailsPerEmployee = new ArrayList<>();
-        String employeeId = entry.getKey();
+        Employee employee = entry.getKey();
         Integer totalCommissionAmount = 0;
 
         for (Map.Entry<ProductType, Integer> productTypeAndSalesValueEntry : entry.getValue().entrySet()) {
@@ -70,7 +70,7 @@ public class CommissionCalculatorServiceImpl implements CommissionCalculatorServ
             calculationDetailsPerEmployee.add(details);
         }
 
-        addToResultLists(employeeId, totalCommissionAmount);
+        addToResultLists(employee, totalCommissionAmount);
     }
 
     private CalculationDetails calculateCommission(Map.Entry<ProductType, Integer> productTypeAndSalesValueEntry) {
@@ -95,13 +95,13 @@ public class CommissionCalculatorServiceImpl implements CommissionCalculatorServ
                 .totalCommissionAmountOfProductType(totalCommissionOfProductType);
     }
 
-    private void addToResultLists(String employeeId, Integer totalCommissionAmount) {
+    private void addToResultLists(Employee employee, Integer totalCommissionAmount) {
         resultList.add(new CommissionData()
-                .employeeId(employeeId)
+                .employee(employee)
                 .commissionAmount(totalCommissionAmount));
 
         resultListWithDetails.add(new CommissionDataDetailed()
-                .employeeId(employeeId)
+                .employee(employee)
                 .totalCommissionAmount(totalCommissionAmount)
                 .calculationDetails(calculationDetailsPerEmployee));
     }

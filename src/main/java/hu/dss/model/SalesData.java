@@ -2,14 +2,14 @@ package hu.dss.model;
 
 public class SalesData {
     private ProductType productType;
-    private String employeeId;
+    private Employee employee;
     private Integer salesValue;
 
     public SalesData() {}
 
-    public SalesData(ProductType productType, String employeeId, Integer salesValue) {
+    public SalesData(ProductType productType, Employee employee, Integer salesValue) {
         this.productType = productType;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.salesValue = salesValue;
     }
 
@@ -22,12 +22,12 @@ public class SalesData {
         return this;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public SalesData employeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public SalesData employee(Employee employee) {
+        this.employee = employee;
         return this;
     }
 
@@ -44,7 +44,7 @@ public class SalesData {
     public String toString() {
         return "SalesData{" +
                 "productType=" + productType +
-                ", employeeId='" + employeeId + '\'' +
+                ", employee='" + employee + '\'' +
                 ", salesValue=" + salesValue +
                 '}';
     }

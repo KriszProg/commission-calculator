@@ -1,6 +1,7 @@
 package hu.dss.service;
 
 import hu.dss.data.Database;
+import hu.dss.model.Employee;
 import hu.dss.util.Message;
 import hu.dss.exception.SalesDataProcessingException;
 import hu.dss.model.ProductType;
@@ -79,7 +80,7 @@ public class SalesDataProcessorServiceImpl implements SalesDataProcessorService 
         String[] parts = line.split(separator.getSeparatorRegex());
         SalesData salesData = new SalesData(
                 ProductType.getProductTypeByCode(parts[0]),
-                parts[1],
+                Employee.getEmployeeById(parts[1]),
                 Integer.parseInt(parts[2].trim()));
         salesDataList.add(salesData);
     }
