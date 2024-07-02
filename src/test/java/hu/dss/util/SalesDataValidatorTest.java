@@ -68,7 +68,7 @@ class SalesDataValidatorTest {
 
     @Test
     @Order(7)
-    void testValidateLineDetailsAndGetErrors_WhenEmployeeIdNotMatchWithPattern_ReturnErrors() {
+    void testValidateLineDetailsAndGetErrors_WhenEmployeeIdIsInvalid_ReturnErrors() {
         String line = "A|ü1|100000";
         Separator separator = Separator.PIPE;
         List<String> errors = validator.validateLineDetailsAndGetErrors(line, separator);

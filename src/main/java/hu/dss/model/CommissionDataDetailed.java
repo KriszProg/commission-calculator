@@ -7,22 +7,22 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlRootElement(name = "commission")
-@XmlType(propOrder = { "employeeId", "totalCommissionAmount", "calculationDetails" })
+@XmlType(propOrder = { "employee", "totalCommissionAmount", "calculationDetails" })
 public class CommissionDataDetailed {
 
-    private String employeeId;
+    private Employee employee;
     private Integer totalCommissionAmount;
     private List<CalculationDetails> calculationDetails;
 
     public CommissionDataDetailed() {}
 
     @XmlElement
-    public String getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public CommissionDataDetailed employeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public CommissionDataDetailed employee(Employee employee) {
+        this.employee = employee;
         return this;
     }
 
@@ -50,7 +50,7 @@ public class CommissionDataDetailed {
     @Override
     public String toString() {
         return "CommissionDataDetailed{" +
-                "employeeId='" + employeeId + '\'' +
+                "employee='" + employee + '\'' +
                 ", totalCommissionAmount=" + totalCommissionAmount +
                 ", calculationDetails=" + calculationDetails +
                 '}';

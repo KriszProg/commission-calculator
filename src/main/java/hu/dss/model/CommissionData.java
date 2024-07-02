@@ -5,20 +5,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "commissionData")
-@XmlType(propOrder = { "employeeId", "commissionAmount" })
+@XmlType(propOrder = { "employee", "commissionAmount" })
 public class CommissionData {
 
-    private String employeeId;
+    private Employee employee;
     private Integer commissionAmount;
     public CommissionData() {}
 
     @XmlElement
-    public String getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public CommissionData employeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public CommissionData employee(Employee employee) {
+        this.employee = employee;
         return this;
     }
 
@@ -35,7 +35,7 @@ public class CommissionData {
     @Override
     public String toString() {
         return "CommissionData{" +
-                "employeeId='" + employeeId + '\'' +
+                "employee='" + employee + '\'' +
                 ", commissionAmount=" + commissionAmount +
                 '}';
     }

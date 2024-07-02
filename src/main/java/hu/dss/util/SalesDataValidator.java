@@ -1,16 +1,14 @@
 package hu.dss.util;
 
+import hu.dss.model.Employee;
 import hu.dss.model.ProductType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SalesDataValidator {
 
     private static final long EXCEPTED_NUMBER_OF_DATA_PER_LINE = 3;
-    private static final String EMPLOYEE_ID_PATTERN = "Ü\\d+";
 
     public boolean isLineSeparatorValid(String line, Separator separator) {
         return line.contains(separator.getSeparatorString());
@@ -44,9 +42,7 @@ public class SalesDataValidator {
     }
 
     private boolean isEmployeeIdValid(String employeeId) {
-        Pattern employeeIdPattern = Pattern.compile(EMPLOYEE_ID_PATTERN);
-        Matcher matcher = employeeIdPattern.matcher(employeeId);
-        return matcher.matches();
+        return Employee.getEmployeeById(employeeId) != null;
     }
 
     private Message validateSalesValueAndGetErrorMessage(String salesValueString) {
