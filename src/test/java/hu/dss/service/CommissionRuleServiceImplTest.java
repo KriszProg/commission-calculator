@@ -1,6 +1,5 @@
 package hu.dss.service;
 
-import static hu.dss.service.CommissionRuleServiceImpl.DEFAULT_PERCENTAGE;
 
 import hu.dss.model.CommissionRule;
 import hu.dss.model.ProductType;
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.*;
 
 import java.util.Map;
 
+import static hu.dss.config.ApplicationConstants.DEFAULT_PERCENTAGE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

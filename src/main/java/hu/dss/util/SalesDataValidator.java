@@ -6,9 +6,9 @@ import hu.dss.model.ProductType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalesDataValidator {
+import static hu.dss.config.ApplicationConstants.EXCEPTED_NUMBER_OF_DATA_PER_LINE;
 
-    private static final long EXCEPTED_NUMBER_OF_DATA_PER_LINE = 3;
+public class SalesDataValidator {
 
     public boolean isLineSeparatorValid(String line, Separator separator) {
         return line.contains(separator.getSeparatorString());
