@@ -10,7 +10,7 @@ public class SalesDataServiceImpl implements SalesDataService {
     private final Database database = Database.getInstance();
 
     @Override
-    public List<SalesData> getSalesDataList() {
+    public List<SalesData> getAllSalesData() {
         return database.getSalesDataList();
     }
 
