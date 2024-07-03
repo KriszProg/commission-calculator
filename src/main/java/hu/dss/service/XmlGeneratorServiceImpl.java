@@ -19,18 +19,11 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.List;
 
+import static hu.dss.config.ApplicationConstants.*;
+
 public class XmlGeneratorServiceImpl implements XmlGeneratorService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XmlGeneratorServiceImpl.class);
-    private static final String XML_BASE_PATH = "C:/commission-report/";
-    public static final String COMMISSION_BY_EMPLOYEE_XML_NAME = "commission-by-employee.xml";
-    public static final String COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME = "commission-by-employee-detailed.xml";
-    public static final String COMMISSION_BY_PRODUCT_TYPE_XML_NAME = "commission-by-product-type.xml";
-    public static final String COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME = "commission-by-product-type-detailed.xml";
-    private static final String COMMISSION_BY_EMPLOYEE_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_EMPLOYEE_XML_NAME;
-    private static final String COMMISSION_BY_EMPLOYEE_DETAILED_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME;
-    private static final String COMMISSION_BY_PRODUCT_TYPE_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_PRODUCT_TYPE_XML_NAME;
-    private static final String COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME;
 
     @Override
     public void generateCommissionByEmployeeXml(List<CommissionDataByEmployee> commissionDataByEmployeeList) {

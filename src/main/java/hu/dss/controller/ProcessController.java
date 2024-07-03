@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.text.MessageFormat;
 import java.util.List;
 
+import static hu.dss.config.ApplicationConstants.*;
+
 public class ProcessController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcessController.class);
@@ -54,24 +56,24 @@ public class ProcessController {
         LOGGER.info(Message.INITIALIZE_COMMISSION_RULES.getMessage());
         ruleService.createCommissionRules();
 
-        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), COMMISSION_BY_EMPLOYEE_XML_NAME));
         List<CommissionDataByEmployee> commissionDataByEmployeeList = commissionDataProviderService.getCommissionDataByEmployeeList();
-        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), COMMISSION_BY_EMPLOYEE_XML_NAME));
         xmlGeneratorService.generateCommissionByEmployeeXml(commissionDataByEmployeeList);
 
-        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME));
         List<CommissionDataByEmployeeDetailed> commissionDataByEmployeeDetailedList = commissionDataProviderService.getCommissionDataByEmployeeDetailedList();
-        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME));
         xmlGeneratorService.generateCommissionByEmployeeDetailedXml(commissionDataByEmployeeDetailedList);
 
-        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), COMMISSION_BY_PRODUCT_TYPE_XML_NAME));
         List<CommissionDataByProductType> commissionDataByProductTypeList = commissionDataProviderService.getCommissionDataByProductTypeList();
-        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), COMMISSION_BY_PRODUCT_TYPE_XML_NAME));
         xmlGeneratorService.generateCommissionByProductTypeXml(commissionDataByProductTypeList);
 
-        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME));
         List<CommissionDataByProductTypeDetailed> commissionDataByProductTypeDetailedList = commissionDataProviderService.getCommissionDataByProductTypeDetailedList();
-        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME));
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME));
         xmlGeneratorService.generateCommissionByProductTypeDetailedXml(commissionDataByProductTypeDetailedList);
     }
 

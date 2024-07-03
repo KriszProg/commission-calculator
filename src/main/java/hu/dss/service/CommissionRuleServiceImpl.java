@@ -4,11 +4,11 @@ import hu.dss.data.Database;
 import hu.dss.model.CommissionRule;
 import hu.dss.model.ProductType;
 
-import java.math.BigDecimal;
+
+import static hu.dss.config.ApplicationConstants.DEFAULT_PERCENTAGE;
 
 public class CommissionRuleServiceImpl implements CommissionRuleService {
 
-    public static final BigDecimal DEFAULT_PERCENTAGE = new BigDecimal(1);
     private final Database database = Database.getInstance();
 
     @Override
