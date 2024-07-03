@@ -1,10 +1,14 @@
 package hu.dss.service;
 
+import hu.dss.model.CommissionDataByEmployee;
+import hu.dss.model.CommissionDataByEmployeeDetailed;
+import hu.dss.model.CommissionDataByProductType;
+import hu.dss.model.CommissionDataByProductTypeDetailed;
+import hu.dss.model.xmlwrapper.CommissionDataByEmployeeDetailedListWrapper;
+import hu.dss.model.xmlwrapper.CommissionDataByEmployeeListWrapper;
+import hu.dss.model.xmlwrapper.CommissionDataByProductTypeDetailedListWrapper;
+import hu.dss.model.xmlwrapper.CommissionDataByProductTypeListWrapper;
 import hu.dss.util.Message;
-import hu.dss.model.CommissionData;
-import hu.dss.model.xmlwrapper.CommissionDataListWrapper;
-import hu.dss.model.CommissionDataDetailed;
-import hu.dss.model.xmlwrapper.CommissionDataDetailedListWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,22 +22,42 @@ import java.util.List;
 public class XmlGeneratorServiceImpl implements XmlGeneratorService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XmlGeneratorServiceImpl.class);
-    public static final String BASE_FILE_PATH = "C:/commission-report/";
-    public static final String COMMISSION_REPORT_FILE_PATH = BASE_FILE_PATH + "commission-report.xml";
-    public static final String COMMISSION_REPORT_DETAILED_FILE_PATH = BASE_FILE_PATH + "commission-report-detailed.xml";
+    private static final String XML_BASE_PATH = "C:/commission-report/";
+    public static final String COMMISSION_BY_EMPLOYEE_XML_NAME = "commission-by-employee.xml";
+    public static final String COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME = "commission-by-employee-detailed.xml";
+    public static final String COMMISSION_BY_PRODUCT_TYPE_XML_NAME = "commission-by-product-type.xml";
+    public static final String COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME = "commission-by-product-type-detailed.xml";
+    private static final String COMMISSION_BY_EMPLOYEE_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_EMPLOYEE_XML_NAME;
+    private static final String COMMISSION_BY_EMPLOYEE_DETAILED_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME;
+    private static final String COMMISSION_BY_PRODUCT_TYPE_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_PRODUCT_TYPE_XML_NAME;
+    private static final String COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_FULL_PATH = XML_BASE_PATH + COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME;
 
     @Override
-    public void generateCommissionReportXml(List<CommissionData> commissionList) {
-        CommissionDataListWrapper wrapper = new CommissionDataListWrapper();
-        wrapper.setCommissions(commissionList);
-        generateXml(wrapper, CommissionDataListWrapper.class, COMMISSION_REPORT_FILE_PATH);
+    public void generateCommissionByEmployeeXml(List<CommissionDataByEmployee> commissionDataByEmployeeList) {
+        CommissionDataByEmployeeListWrapper wrapper = new CommissionDataByEmployeeListWrapper();
+        wrapper.setCommissions(commissionDataByEmployeeList);
+        generateXml(wrapper, CommissionDataByEmployeeListWrapper.class, COMMISSION_BY_EMPLOYEE_XML_FULL_PATH);
     }
 
     @Override
-    public void generateCommissionReportDetailedXml(List<CommissionDataDetailed> commissionListWithDetails) {
-        CommissionDataDetailedListWrapper wrapper = new CommissionDataDetailedListWrapper();
-        wrapper.setCommissions(commissionListWithDetails);
-        generateXml(wrapper, CommissionDataDetailedListWrapper.class, COMMISSION_REPORT_DETAILED_FILE_PATH);
+    public void generateCommissionByEmployeeDetailedXml(List<CommissionDataByEmployeeDetailed> commissionDataByEmployeeDetailedList) {
+        CommissionDataByEmployeeDetailedListWrapper wrapper = new CommissionDataByEmployeeDetailedListWrapper();
+        wrapper.setCommissions(commissionDataByEmployeeDetailedList);
+        generateXml(wrapper, CommissionDataByEmployeeDetailedListWrapper.class, COMMISSION_BY_EMPLOYEE_DETAILED_XML_FULL_PATH);
+    }
+
+    @Override
+    public void generateCommissionByProductTypeXml(List<CommissionDataByProductType> commissionDataByProductTypeList) {
+        CommissionDataByProductTypeListWrapper wrapper = new CommissionDataByProductTypeListWrapper();
+        wrapper.setCommissions(commissionDataByProductTypeList);
+        generateXml(wrapper, CommissionDataByProductTypeListWrapper.class, COMMISSION_BY_PRODUCT_TYPE_XML_FULL_PATH);
+    }
+
+    @Override
+    public void generateCommissionByProductTypeDetailedXml(List<CommissionDataByProductTypeDetailed> commissionDataByProductTypeDetailedList) {
+        CommissionDataByProductTypeDetailedListWrapper wrapper = new CommissionDataByProductTypeDetailedListWrapper();
+        wrapper.setCommissions(commissionDataByProductTypeDetailedList);
+        generateXml(wrapper, CommissionDataByProductTypeDetailedListWrapper.class, COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_FULL_PATH);
     }
 
     private <T> void generateXml(T wrapper, Class<T> wrapperClass, String filePath) {
