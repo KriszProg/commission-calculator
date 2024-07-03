@@ -1,5 +1,9 @@
 package hu.dss.controller;
 
+import hu.dss.model.CommissionDataByEmployee;
+import hu.dss.model.CommissionDataByEmployeeDetailed;
+import hu.dss.model.CommissionDataByProductType;
+import hu.dss.model.CommissionDataByProductTypeDetailed;
 import hu.dss.util.Message;
 import hu.dss.service.*;
 import hu.dss.util.Separator;
@@ -7,29 +11,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 public class ProcessController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcessController.class);
 
     private final InputService inputService;
-    private final CommissionRuleService ruleService;
     private final SalesDataProcessorService salesDataProcessorService;
-    private final SalesDataService salesDataService;
-    private final CommissionCalculatorService commissionCalculatorService;
+    private final CommissionRuleService ruleService;
+    private final CommissionDataProviderService commissionDataProviderService;
     private final XmlGeneratorService xmlGeneratorService;
 
     private String filePath;
     private Separator separator;
 
-    public ProcessController(InputService inputService, CommissionRuleService ruleService,
-                             SalesDataProcessorService salesDataProcessorService, SalesDataService salesDataService,
-                             CommissionCalculatorService commissionCalculatorService, XmlGeneratorService xmlGeneratorService) {
+    public ProcessController(InputService inputService, SalesDataProcessorService salesDataProcessorService,
+                             CommissionRuleService ruleService,
+                             CommissionDataProviderService commissionDataProviderService,
+                             XmlGeneratorService xmlGeneratorService) {
         this.inputService = inputService;
-        this.ruleService = ruleService;
         this.salesDataProcessorService = salesDataProcessorService;
-        this.salesDataService = salesDataService;
-        this.commissionCalculatorService = commissionCalculatorService;
+        this.ruleService = ruleService;
+        this.commissionDataProviderService = commissionDataProviderService;
         this.xmlGeneratorService = xmlGeneratorService;
     }
 
@@ -50,14 +54,25 @@ public class ProcessController {
         LOGGER.info(Message.INITIALIZE_COMMISSION_RULES.getMessage());
         ruleService.createCommissionRules();
 
-        LOGGER.info(Message.CALCULATE_COMMISSION.getMessage());
-        commissionCalculatorService.calculateCommission(salesDataService.getSalesDataList());
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_XML_NAME));
+        List<CommissionDataByEmployee> commissionDataByEmployeeList = commissionDataProviderService.getCommissionDataByEmployeeList();
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_XML_NAME));
+        xmlGeneratorService.generateCommissionByEmployeeXml(commissionDataByEmployeeList);
 
-        LOGGER.info(Message.START_GENERATING_COMMISSION_REPORT_XML.getMessage());
-        xmlGeneratorService.generateCommissionReportXml(commissionCalculatorService.getResultList());
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME));
+        List<CommissionDataByEmployeeDetailed> commissionDataByEmployeeDetailedList = commissionDataProviderService.getCommissionDataByEmployeeDetailedList();
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_EMPLOYEE_DETAILED_XML_NAME));
+        xmlGeneratorService.generateCommissionByEmployeeDetailedXml(commissionDataByEmployeeDetailedList);
 
-        LOGGER.info(Message.START_GENERATING_COMMISSION_REPORT_DETAILED_XML.getMessage());
-        xmlGeneratorService.generateCommissionReportDetailedXml(commissionCalculatorService.getResultListWithDetails());
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_XML_NAME));
+        List<CommissionDataByProductType> commissionDataByProductTypeList = commissionDataProviderService.getCommissionDataByProductTypeList();
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_XML_NAME));
+        xmlGeneratorService.generateCommissionByProductTypeXml(commissionDataByProductTypeList);
+
+        LOGGER.info(MessageFormat.format(Message.COLLECT_COMMISSION_DATA_FOR_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME));
+        List<CommissionDataByProductTypeDetailed> commissionDataByProductTypeDetailedList = commissionDataProviderService.getCommissionDataByProductTypeDetailedList();
+        LOGGER.info(MessageFormat.format(Message.START_GENERATING_XML.getMessage(), XmlGeneratorServiceImpl.COMMISSION_BY_PRODUCT_TYPE_DETAILED_XML_NAME));
+        xmlGeneratorService.generateCommissionByProductTypeDetailedXml(commissionDataByProductTypeDetailedList);
     }
 
     private void initFilePath() {

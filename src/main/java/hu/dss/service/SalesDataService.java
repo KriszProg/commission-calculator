@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SalesDataService {
 
-    List<SalesData> getSalesDataList();
+    List<SalesData> getAllSalesData();
 
 }

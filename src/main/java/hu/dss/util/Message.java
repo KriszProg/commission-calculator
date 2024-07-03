@@ -1,12 +1,12 @@
 package hu.dss.util;
 
 public enum Message {
-    CALCULATE_COMMISSION("Calculate commission..."),
     CHOOSE_SEPARATOR("[STEP_2] Choose separator your sales report file contains:"),
     CHOOSE_SEPARATOR_ENTER_CHOICE("Enter your choice (p or s): "),
     CHOOSE_SEPARATOR_INVALID_CHOICE("Invalid choice. Please enter p or s"),
     CHOOSE_SEPARATOR_OPTION_PIPE("[p] pipe ('|')"),
     CHOOSE_SEPARATOR_OPTION_SEMICOLON("[s] semicolon (';')"),
+    COLLECT_COMMISSION_DATA_FOR_XML("Collect commission data for {0}..."),
     ENTER_FILE_PATH("[STEP_1] Enter the full filepath of your sales report file (example: C:\\reports\\sales-report.txt) and hit Enter:"),
     ERROR_INVALID_EMPLOYEE_ID("[ERROR] Invalid employee id!"),
     ERROR_INVALID_LINE_CONTENT("[ERROR] Invalid line content (expected exactly 3 data per line)!"),
@@ -22,8 +22,7 @@ public enum Message {
     PROVIDE_SETUP("[SETUP] Please provide setups in 2 steps..."),
     SETUPS_COMPLETED("Setups completed successfully!"),
     START_EXECUTION("Start execution..."),
-    START_GENERATING_COMMISSION_REPORT_XML("Start generating commission-report.xml..."),
-    START_GENERATING_COMMISSION_REPORT_DETAILED_XML("Start generating commission-report-detailed.xml..."),
+    START_GENERATING_XML("Start generating {0}..."),
     XML_FILE_CREATED_SUCCESSFULLY_AT("XML file created successfully at: {0}");
 
     private final String message;

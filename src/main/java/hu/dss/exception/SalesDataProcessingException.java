@@ -5,7 +5,7 @@ import hu.dss.util.Message;
 import java.util.List;
 import java.util.Map;
 
-public class SalesDataProcessingException extends /*Exception*/ RuntimeException {
+public class SalesDataProcessingException extends RuntimeException {
 
     private static final String LINE_SEPARATOR = "-".repeat(20) + "\n";
 

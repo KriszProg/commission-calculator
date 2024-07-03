@@ -14,14 +14,15 @@ public class CommissionCalculatorApp {
         Thread.setDefaultUncaughtExceptionHandler(new GlobalExceptionHandler());
 
         InputService inputService = new InputServiceImpl();
-        CommissionRuleService ruleService = new CommissionRuleServiceImpl();
         SalesDataValidator validator = new SalesDataValidator();
         SalesDataProcessorService salesDataProcessorService = new SalesDataProcessorServiceImpl(validator);
         SalesDataService salesDataService = new SalesDataServiceImpl();
+        CommissionRuleService ruleService = new CommissionRuleServiceImpl();
         CommissionCalculatorService commissionCalculatorService = new CommissionCalculatorServiceImpl(ruleService);
+        CommissionDataProviderService commissionDataProviderService = new CommissionDataProviderServiceImpl(salesDataService, commissionCalculatorService);
         XmlGeneratorService xmlGeneratorService = new XmlGeneratorServiceImpl();
-        ProcessController controller = new ProcessController(inputService, ruleService, salesDataProcessorService,
-                salesDataService, commissionCalculatorService, xmlGeneratorService);
+        ProcessController controller = new ProcessController(inputService, salesDataProcessorService, ruleService,
+                commissionDataProviderService, xmlGeneratorService);
 
         controller.executeProcess();
 
