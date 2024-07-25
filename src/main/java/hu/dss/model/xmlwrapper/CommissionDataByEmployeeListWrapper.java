@@ -1,17 +1,19 @@
 package hu.dss.model.xmlwrapper;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import hu.dss.model.CommissionDataByEmployee;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "commissions")
+@JacksonXmlRootElement(localName = "commissions")
 public class CommissionDataByEmployeeListWrapper {
 
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "commission")
     private List<CommissionDataByEmployee> commissions;
 
-    @XmlElement(name = "commission")
     public List<CommissionDataByEmployee> getCommissions() {
         return commissions;
     }

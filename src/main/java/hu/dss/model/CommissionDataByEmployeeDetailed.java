@@ -1,14 +1,18 @@
 package hu.dss.model;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import java.util.List;
 
-@XmlRootElement(name = "commission")
-@XmlAccessorType(XmlAccessType.FIELD)
+@JacksonXmlRootElement(localName = "commission")
+@JsonPropertyOrder({ "employee", "commissionAmount", "items" })
 public class CommissionDataByEmployeeDetailed extends CommissionDataByEmployee {
 
-    @XmlElementWrapper(name = "items")
-    @XmlElement(name = "item")
+    @JacksonXmlElementWrapper(localName = "items")
+    @JacksonXmlProperty(localName = "item")
     private List<CommissionItem> items;
 
     public CommissionDataByEmployeeDetailed() {}
