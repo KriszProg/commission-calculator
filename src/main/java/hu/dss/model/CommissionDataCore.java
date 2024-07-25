@@ -1,10 +1,10 @@
 package hu.dss.model;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@XmlTransient
 public abstract class CommissionDataCore {
 
+    @JacksonXmlProperty(localName = "commissionAmount")
     protected Integer commissionAmount;
 
     protected CommissionDataCore() {}

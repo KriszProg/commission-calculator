@@ -1,19 +1,24 @@
 package hu.dss.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@XmlType(propOrder = { "employee", "productType", "salesValue", "baseCommissionAmount", "bonusCommissionAmount", "totalCommissionAmount" })
+@JsonPropertyOrder({ "employee", "productType", "salesValue", "baseCommissionAmount", "bonusCommissionAmount", "totalCommissionAmount" })
 public class CommissionItem {
 
+    @JacksonXmlProperty(localName = "employee")
     private Employee employee;
+    @JacksonXmlProperty(localName = "productType")
     private ProductType productType;
+    @JacksonXmlProperty(localName = "salesValue")
     private Integer salesValue;
+    @JacksonXmlProperty(localName = "baseCommissionAmount")
     private Integer baseCommissionAmount;
+    @JacksonXmlProperty(localName = "bonusCommissionAmount")
     private Integer bonusCommissionAmount;
+    @JacksonXmlProperty(localName = "totalCommissionAmount")
     private Integer totalCommissionAmount;
 
-    @XmlElement
     public Employee getEmployee() {
         return employee;
     }
@@ -23,7 +28,6 @@ public class CommissionItem {
         return this;
     }
 
-    @XmlElement
     public ProductType getProductType() {
         return productType;
     }
@@ -33,7 +37,6 @@ public class CommissionItem {
         return this;
     }
 
-    @XmlElement
     public Integer getSalesValue() {
         return salesValue;
     }
@@ -43,7 +46,6 @@ public class CommissionItem {
         return this;
     }
 
-    @XmlElement
     public Integer getBaseCommissionAmount() {
         return baseCommissionAmount;
     }
@@ -53,7 +55,6 @@ public class CommissionItem {
         return this;
     }
 
-    @XmlElement
     public Integer getBonusCommissionAmount() {
         return bonusCommissionAmount;
     }
@@ -63,7 +64,6 @@ public class CommissionItem {
         return this;
     }
 
-    @XmlElement
     public Integer getTotalCommissionAmount() {
         return totalCommissionAmount;
     }

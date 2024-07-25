@@ -1,13 +1,14 @@
 package hu.dss.model;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@XmlRootElement(name = "commission")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "productType", "commissionAmount" })
+@JacksonXmlRootElement(localName = "commission")
+@JsonPropertyOrder({ "productType", "commissionAmount" })
 public class CommissionDataByProductType extends CommissionDataCore {
 
-    @XmlElement
+    @JacksonXmlProperty(localName = "productType")
     protected ProductType productType;
 
     public CommissionDataByProductType() {}
